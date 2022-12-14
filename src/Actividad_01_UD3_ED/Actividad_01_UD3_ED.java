@@ -17,21 +17,21 @@ import java.io.IOException;
 public class Actividad_01_UD3_ED 
 {
     private static byte[] buffer = new byte[1000];
-    private static String fileName = "fichero.dat";
-    private static FileInputStream inputStream = null;
-    private static BufferedInputStream inputBuffer = null;
+    private static String nombreArchivo = "fichero.dat";
+    private static FileInputStream Corriente_Entrada = null;
+    private static BufferedInputStream Buffer_Entrada = null;
 
-    public static void inicializateFiles() throws FileNotFoundException
+    public static void inicializarArchivos() throws FileNotFoundException
     {
-        inputStream = new FileInputStream(fileName);
-        inputBuffer = new BufferedInputStream(inputStream);
+        Corriente_Entrada = new FileInputStream(nombreArchivo);
+        Buffer_Entrada = new BufferedInputStream(Corriente_Entrada);
     }
     
-    public static int showFileText() throws IOException
+    public static int mostrarTextoArchivo() throws IOException
     {
         int total = 0;
         int nRead = 0;
-        while((nRead = inputStream.read(buffer)) != -1) 
+        while((nRead = Corriente_Entrada.read(buffer)) != -1) 
         {
             System.out.println(new String(buffer));
             total += nRead;
@@ -47,9 +47,9 @@ public class Actividad_01_UD3_ED
     {        
         try 
         {
-            inicializateFiles();
+            inicializarArchivos();
             
-            int total = showFileText();           
+            int total = mostrarTextoArchivo();           
 
             System.out.println("\nLeídos " + total + " bytes");
         }
@@ -61,10 +61,10 @@ public class Actividad_01_UD3_ED
         {
             try 
             {
-                if( inputBuffer != null && inputStream != null )
+                if( Buffer_Entrada != null && Corriente_Entrada != null )
                 {
-                    inputStream.close();
-                    inputBuffer.close();
+                    Corriente_Entrada.close();
+                    Buffer_Entrada.close();
                 }                
             } 
             catch (IOException ex) 
